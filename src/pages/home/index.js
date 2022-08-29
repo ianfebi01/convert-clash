@@ -29,6 +29,28 @@ export default function Home() {
   sni: bug.com
   skip-cert-verify: true`);
   };
+
+  const exportData = () => {
+    const jsonString = `data:text/yaml;chatset=utf-8,${encodeURIComponent(
+      JSON.stringify(result)
+    )}`;
+    const link = document.createElement("a");
+    link.href = jsonString;
+    link.download = "data.yaml";
+
+    link.click();
+  };
+
+  const downloadTxtFile = () => {
+    const element = document.createElement("a");
+    const file = new Blob([result], {
+      type: "text/plain",
+    });
+    element.href = URL.createObjectURL(file);
+    element.download = `config.yaml`;
+    document.body.appendChild(element);
+    element.click();
+  };
   return (
     <section className='container'>
       <div className='box-2'>
@@ -61,7 +83,12 @@ export default function Home() {
                 onChange={(e) => setResult(e.target.value)}
               ></textarea>
             </div>
-            <button type='submit' value={result} className='download-btn'>
+            <button
+              type='submit'
+              value={result}
+              className='download-btn'
+              onClick={downloadTxtFile}
+            >
               Download
             </button>
           </div>
