@@ -5,6 +5,8 @@
   --background: rgb(247, 247, 247);
   --textDark: hsla(0, 0%, 0%, 0.66);
   --textLight: hsla(0, 0%, 0%, 0.33);
+  --shadow: rgba(99, 99, 99, 0.2);
+  --error: #b94a48;
 }
 body {
   font-family: "Poppins", sans-serif;
