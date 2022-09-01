@@ -1,154 +1,165 @@
 body {
-  background-color: var(--background);
   color: var(--textDark);
+  margin: 0;
+  background: #fff;
+  font-size: 1em;
+  line-height: 1.5;
 }
-section {
-  height: 90vh;
-  position: relative;
+
+h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #363636;
+  margin: 0 0 0.2em 0;
+  letter-spacing: -2px;
 }
+h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #363636;
+  margin: 0.2em 0;
+  letter-spacing: -2px;
+}
+h3 {
+  margin: 0;
+  font-weight: normal;
+  color: var(--textLight);
+  font-size: 1em;
+}
+
 .container {
-  max-width: 80vw;
-  width: 100%;
-  height: 70vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  right: 0;
-  left: 0;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-  gap: 10px;
+  flex-grow: 1;
+  margin: 0 auto;
+  position: relative;
+  width: auto;
 }
+
 .box-2 {
-  display: flex;
-  gap: 10px;
+  margin-left: -0.75rem;
+  margin-right: -0.75rem;
+  margin-top: -0.75rem;
 }
+
 .box {
   background: #fff;
-  width: 458px;
-  height: 496px;
-  border-radius: 10px;
-  margin-top: 0;
-  display: flex;
-  justify-content: center;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  display: block;
+  flex-basis: 0;
+  flex-grow: 1;
+  flex-shrink: 1;
+  padding: 4.5rem;
+  text-align: center;
 }
 .content {
-  margin: 70px 60px;
   display: flex;
   flex-direction: column;
+}
+
+button {
+  background: var(--brandColor);
+  outline: none;
+  border: 0px;
+  color: #fff;
+  width: 100%;
+  cursor: pointer;
   justify-content: center;
+  padding: 0.5em 0;
+  font-size: 1.2em;
+  border-radius: 5px;
+  font-weight: normal;
   width: 100%;
 }
-h1 {
-  font-size: 40px;
-  margin-top: 0;
-  margin-bottom: 10px;
-}
+
 textarea {
-  border-radius: 10px;
-  border: none;
+  width: 99%;
+  height: 6em;
   resize: none;
-  width: 97%;
-  height: 96%;
-  padding: 2px 5px !important;
-  margin: 0 !important;
 }
 .textarea {
-  border: 1px solid var(--textDark);
-  border-radius: 10px;
+  border: 1px solid var(--textLight);
+  border-radius: 5px;
+  outline: none;
 }
 .error-border {
   border: 1px solid var(--error);
-}
-
-textarea:focus {
+  border-radius: 5px;
   outline: none;
 }
-
-.left .content .textarea {
-  height: 100px;
-}
-
-.right .content .textarea {
-  height: 160px;
-}
-
-.bottom {
-  height: 60px;
-  width: 928.2px;
+.error-text {
   display: flex;
-  align-items: center;
+  justify-content: start;
+  color: 1px solid var(--error);
 }
-.bottom .left {
+
+.header-left,
+.header-right {
+  text-align: left;
+  width: 100%;
+}
+.bottom {
+  display: block;
+  flex-basis: 0;
+  flex-grow: 1;
+  flex-shrink: 1;
+  padding: 2rem;
+  text-align: center;
+}
+
+.bottom .icon {
   display: flex;
   padding: 0 10px;
   gap: 30px;
+  align-items: center;
+  justify-content: center;
 }
-.bottom .left a {
+.bottom .icon a {
   color: var(--textDark);
 }
-button {
-  border-radius: 5px;
-  border: 0;
-  cursor: pointer;
-  width: 100px;
-  height: 40px;
-  font-family: "Poppins", sans-serif;
-  font-size: 15px;
 
-  transition: all 0.2s;
-}
-button:hover {
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-}
-
-.convert-btn {
-  background: #21e1e1;
-  margin-top: 10px;
-  color: #fff;
-}
-.download-btn {
-  background: #3b9ae1;
-  margin-top: 10px;
-  color: #fff;
-  width: 150px;
-}
-
-@media (max-width: 960px) {
+@media (min-width: 826px) {
+  body {
+    background: var(--background);
+  }
   .box-2 {
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
   }
   .container {
-    max-width: 80vw;
-  }
-  .bottom {
     display: flex;
-    max-width: 458px;
+    flex-direction: column;
+    gap: 10px;
+    padding: 2em;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 95vw;
+    position: absolute;
   }
-}
-@media (max-width: 486px) {
   .box {
-    max-width: 300px;
-    max-height: 320px;
+    display: flex;
+    border-radius: 5px;
+    max-width: 30em;
+    height: 30em;
+    align-items: center;
+    justify-content: center;
   }
-  .content {
-    margin: 20px 20px;
+  .content-left,
+  .content-right {
+    width: 100%;
   }
   textarea {
-    width: 96%;
-    height: 96%;
-  }
-  .content .textarea {
-    width: 250px;
-  }
-  .bottom {
-    display: flex;
-    max-width: 300px;
+    width: 99%;
+    height: 12em;
+    resize: none;
   }
 }
+/* @media (min-width: 1294px) {
+  .box {
+    width: 30em;
+  }
+} */

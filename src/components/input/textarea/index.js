@@ -6,14 +6,17 @@ export default function TextArea({ placeholder, ...props }) {
   return (
     <div>
       <div
-        className={
-          meta.touched && meta.error ? " textarea error-border" : "textarea"
-        }
+      // className={
+      //   meta.touched && meta.error ? " textarea error-border" : "textarea"
+      // }
       >
         {/* {console.log("input eror : ", meta.error)}
       {console.log("input Touched : ", meta.touched)}
     {console.log("input name : ", field.name)} */}
         <textarea
+          className={
+            meta.touched && meta.error ? " textarea error-border" : "textarea"
+          }
           type={field.type}
           name={field.name}
           placeholder={placeholder}

@@ -16,6 +16,7 @@ import * as Yup from "yup";
 import { Field, Form, Formik } from "formik";
 import { useField, ErrorMessage } from "formik";
 import TextArea from "../../components/input/textarea";
+import Gap from "../../helpers/Gap";
 
 export default function Home() {
   const [result, setResult] = useState("");
@@ -171,72 +172,92 @@ rules:
   // /^(trojan)\:\/\/([a-zA-Z0-9_\-]+)@([a-zA-Z0-9_\-\.]+)\:([0-9]+)/gm
   return (
     <section className='container'>
-      <div className='box-2'>
-        <div className='left box '>
-          <div className='content'>
-            <h1>Paste Your Account</h1>
-            <Formik
-              enableReinitialize
-              initialValues={{ url }}
-              validationSchema={urlValidation}
-              onSubmit={() => {
-                convert();
-              }}
-            >
-              {(formik) => (
-                <Form>
-                  <TextArea
-                    placeholder='Paste Here'
-                    name='url'
-                    onChange={handleChange}
-                    type='text'
-                  />
-                  <button type='submit' className='convert-btn'>
-                    Convert
-                  </button>
-                </Form>
-              )}
-            </Formik>
-          </div>
-        </div>
-        <div className='right box'>
-          <div className='content'>
-            <h1>Result</h1>
-            <div className='textarea'>
-              <textarea
-                placeholder='Result'
-                value={result}
-                name='gg'
-                onChange={(e) => setResult(e.target.value)}
-              ></textarea>
+      <div className='wrap'>
+        <div className='box-2'>
+          <div className='left box'>
+            <div className='content-left'>
+              <div className='header-left'>
+                <h1>Paste Your Account</h1>
+                <h3>
+                  This file config only for OpenClash, CFM, CFA. Only work for
+                  Trojan and Trojan-Go account.
+                </h3>
+                <Gap h='20px' />
+              </div>
+              <Formik
+                enableReinitialize
+                initialValues={{ url }}
+                validationSchema={urlValidation}
+                onSubmit={() => {
+                  convert();
+                }}
+              >
+                {(formik) => (
+                  <Form>
+                    <TextArea
+                      placeholder='Paste Here'
+                      name='url'
+                      onChange={handleChange}
+                      type='text'
+                    />
+                    <Gap h='10px' />
+                    <button type='submit' className='convert-btn'>
+                      Convert
+                    </button>
+                  </Form>
+                )}
+              </Formik>
             </div>
-            <button
-              value={result}
-              className='download-btn'
-              onClick={downloadTxtFile}
-            >
-              Download Config
-            </button>
+          </div>
+          <div className='right box'>
+            <div className='content-right'>
+              <div className='header-right'>
+                <h1>Result</h1>
+                <h3>
+                  You can copy this format account or download this file config
+                  bellow.
+                </h3>
+                <Gap h='20px' />
+              </div>
+
+              <div>
+                <textarea
+                  className='textarea'
+                  placeholder='Result'
+                  value={result}
+                  name='gg'
+                  onChange={(e) => setResult(e.target.value)}
+                ></textarea>
+              </div>
+              <Gap h='10px' />
+              <button
+                value={result}
+                className='download-btn'
+                onClick={downloadTxtFile}
+              >
+                Download Config
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-      <div className='bottom'>
-        <div className='left'>
-          <a href='https://twitter.com/ianfebi01'>
-            <FontAwesomeIcon icon={faTwitter} size='lg' />
-          </a>
-          <a href='https://www.facebook.com/ianfebi01/'>
-            <FontAwesomeIcon icon={faFacebook} size='lg' />
-          </a>
-          <a href='https://www.instagram.com/ianfebi01/'>
-            <FontAwesomeIcon icon={faInstagram} size='lg' />
-          </a>
-          <a href='https://github.com/ianfebi01'>
-            <FontAwesomeIcon icon={faGithub} size='lg' />
-          </a>
-          <a href='mailto:ianfebi01@gmail.com'>
-            <FontAwesomeIcon icon={faEnvelope} size='lg' />
-          </a>
+        <div className='bottom'>
+          <div className='icon'>
+            <a href='https://twitter.com/ianfebi01'>
+              <FontAwesomeIcon icon={faTwitter} size='lg' />
+            </a>
+            <a href='https://www.facebook.com/ianfebi01/'>
+              <FontAwesomeIcon icon={faFacebook} size='lg' />
+            </a>
+            <a href='https://www.instagram.com/ianfebi01/'>
+              <FontAwesomeIcon icon={faInstagram} size='lg' />
+            </a>
+            <a href='https://github.com/ianfebi01'>
+              <FontAwesomeIcon icon={faGithub} size='lg' />
+            </a>
+            <a href='mailto:ianfebi01@gmail.com'>
+              <FontAwesomeIcon icon={faEnvelope} size='lg' />
+            </a>
+          </div>
         </div>
       </div>
     </section>
