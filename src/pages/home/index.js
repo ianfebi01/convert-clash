@@ -21,9 +21,8 @@ import jsyaml from "js-yaml";
 
 export default function Home() {
   const [result, setResult] = useState("");
-  // const [input, setInput] = useState(
-  //   "trojan://7dc1ab20-26f0-11ed-b70d-1239d0255272@id5-trojan.bonds.id:443/"
-  // );
+  const [result02, setResult02] = useState([]);
+
   const inputInfos = {
     url: "",
   };
@@ -43,8 +42,7 @@ export default function Home() {
         "Please insert valid url"
       ),
   });
-  // /^(trojan-go)\:\/\/([a-zA-Z0-9_\-]+)@([a-zA-Z0-9_\-\.]+)\:([0-9]+)\/\?(sni)\=([a-zA-Z0-9_\-\.]+)\&(type)\=(ws)\&(host)\=([a-zA-Z0-9_\-\.]+)\&(path)\=([a-zA-Z0-9\%\-\_]+)/
-  // /^(trojan)\:\/\/([a-zA-Z0-9_\-]+)@([a-zA-Z0-9_\-\.]+)\:([0-9]+)/
+
   const convert = () => {
     const protocol = url.split(/(:\/\/)/);
     if (protocol[0] === "trojan") {
@@ -60,6 +58,15 @@ export default function Home() {
   udp: true
   sni: bug.com
   skip-cert-verify: true`);
+
+      setResult02({
+        protocol: "trojan",
+        host: `${host[0]}`,
+        type: `${result2[0]}`,
+        server: `${host[0]}`,
+        port: `${port[0]}`,
+        password: `${pw[0]}`,
+      });
     }
     if (protocol[0] === "trojan-go") {
       const result2 = url.split(/(:\/\/)/);
@@ -77,7 +84,6 @@ export default function Home() {
         .replace("%2F", "/")
         .replace("%2F", "/");
 
-      console.log(path);
       setResult(`- name: ${host[0]}
   type: trojan
   server: ${host[0]}
@@ -91,67 +97,103 @@ export default function Home() {
     path: "${path}"
     headers:
       host: ${hostHeader}`);
+
+      setResult02({
+        protocol: "trojan-go",
+        host: `${host[0]}`,
+        type: `${result2[0]}`,
+        server: `${host[0]}`,
+        port: `${port[0]}`,
+        password: `${pw[0]}`,
+        sni: `${sni}`,
+        network: `${network}`,
+        path: `"${path}"`,
+        host: `${hostHeader}`,
+      });
     }
   };
 
   const downloadConfig = () => {
     const element = document.createElement("a");
     const file = {
-      proxies: `${result}`,
+      proxies: `[${
+        result02.protocol === "trojan"
+          ? {
+              name: result02.host,
+              type: result02.type,
+              server: result02.server,
+              port: result02.port,
+              password: result02.password,
+              udp: "true",
+              sni: "bug.com",
+              "skip-cert-verify": "true",
+            }
+          : ""
+      }]`,
       "redir-port": "7892",
-      // tproxy-port: '7895',
-      // port: '7890',
-      // socks-port: '7891',
-      // mixed-port: '7893',
-      // mode: 'global',
-      // log-level: 'silent',
-      // allow-lan: 'true',
-      // external-controller: '0.0.0.0:9090',
-      // secret: '123456'
-      // bind-address: "*"
-      // external-ui: "/usr/share/openclash/ui"
-      // ipv6: false
-      // geodata-mode: false
-      // geodata-loader: memconservative
-      // tcp-concurrent: true
-      // dns:
-      //   enable: true
-      //   ipv6: false
-      //   nhanced-mode: redir-host
-      //   listen: 0.0.0.0:7874
-      //   nameserver:
-      //   - dhcp://"usb0"
-      //   - 192.168.19.61
-      //   default-nameserver:
-      //   - 192.168.19.61
-      //   use-hosts: true
-      // sniffer:
-      //   enable: true
-      //   sniffing:
-      //   - tls
-      //   - http
-      // profile:
-      //   store-selected: true
-      //   store-fake-ip: true
-      // hosts:
-      //   internetbaik.telkomsel.com: 0.0.0.0
-      //   internettepat.telkomsel.com: 0.0.0.0
-      //   e1.whatsapp.net: 108.138.141.52
-      //   binance.com: 1.1.1.1
-      //   "*.binance.com": 1.1.1.1
-      //   data-seed-prebsc-1-s1.binance.org: 99.83.248.37
-      //   shopee.co.id: 143.92.75.65
-      //   cf.shopee.co.id: 199.91.74.171
-      //   api.shopee.co.id: 143.92.75.65
-      //   mall.shopee.co.id: 143.92.75.65
-      //   games.shopee.co.id: 143.92.81.64
-      //   df.infra.sz.shopee.co.id: 143.92.85.2
-      //   log-collector.shopee.co.id: 103.115.77.222
-      //   data-rep.livetech.shopee.co.id: 143.92.85.2
-      //   shopeemobile.com: 103.115.78.65
-      //   deo.shopeemobile.com: 36.91.231.33
-      //   gslb.sgw.shopeemobile.com: 103.115.76.67
-      //   c-api-bit.shopeemobile.com: 103.115.78.89,
+      "tproxy-port": "7895",
+      port: "7890",
+      "socks-port": "7891",
+      "mixed-port": "7893",
+      mode: "global",
+      "log-level": "silent",
+      "allow-lan": "true",
+      "external-controller": "0.0.0.0:9090",
+      secret: "123456",
+      " bind-address": "*",
+      "external-ui": '"/usr/share/openclash/ui"',
+      ipv6: "false",
+      "geodata-mode": "false",
+      "geodata-loader": "memconservative",
+      "tcp-concurrent": "true",
+      dns: [
+        {
+          enable: "true",
+          ipv6: "false",
+          "enhanced-mode": "redir-host",
+          listen: "0.0.0.0:7874",
+          nameserver: ['dhcp://"usb0"', " 192.168.19.61"],
+
+          "default-nameserver": ["192.168.19.61"],
+          "use-hosts": "true",
+        },
+      ],
+
+      sniffer: [
+        {
+          enable: "true",
+          sniffing: ["tls", "http"],
+        },
+      ],
+
+      profile: [
+        {
+          "store-selected": "true",
+          "store-fake-ip": "true",
+        },
+      ],
+      hosts: [
+        {
+          "internetbaik.telkomsel.com": "0.0.0.0",
+          "internettepat.telkomsel.com": "0.0.0.0",
+          "e1.whatsapp.net": "108.138.141.52",
+          "binance.com": "1.1.1.1",
+          '"*.binance.com"': "1.1.1.1",
+          "data-seed-prebsc-1-s1.binance.org": "99.83.248.37",
+          "shopee.co.id": "143.92.75.65",
+          "cf.shopee.co.id": "199.91.74.171",
+          "api.shopee.co.id": "143.92.75.65",
+          "mall.shopee.co.id": "143.92.75.65",
+          "games.shopee.co.id": "143.92.81.64",
+          "df.infra.sz.shopee.co.id": "143.92.85.2",
+          "log-collector.shopee.co.id": "103.115.77.222",
+          "data-rep.livetech.shopee.co.id": "143.92.85.2",
+          "shopeemobile.com": "103.115.78.65",
+          "deo.shopeemobile.com": "36.91.231.33",
+          "gslb.sgw.shopeemobile.com": "103.115.76.67",
+          "c-api-bit.shopeemobile.com": "103.115.78.89",
+        },
+      ],
       rules: [
         "IP-CIDR,198.18.0.1/16,REJECT,no-resolve",
         "DST-PORT,7892,REJECT",
@@ -172,9 +214,8 @@ export default function Home() {
 
   const downloadTxtFile = () => {
     const element = document.createElement("a");
-    const file = new Blob(
-      [
-        `---
+    const file = new Blob([
+      `---
 proxies:
 ${result}
 redir-port: 7892
@@ -236,11 +277,7 @@ rules:
 - DST-PORT,7892,REJECT
 - DST-PORT,7895,REJECT
 - MATCH,GLOBAL`,
-      ],
-      {
-        type: "text/plain",
-      }
-    );
+    ]);
     element.href = URL.createObjectURL(file);
     element.download = `config.yaml`;
     document.body.appendChild(element);
@@ -310,7 +347,7 @@ rules:
               <button
                 value={result}
                 className='download-btn'
-                onClick={downloadConfig}
+                onClick={downloadTxtFile}
               >
                 Download Config
               </button>
