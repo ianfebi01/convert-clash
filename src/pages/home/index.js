@@ -55,7 +55,7 @@ export default function Home() {
   port: ${port[0]}
   password: ${pw[0]}
   udp: true
-  sni: bug.com
+  sni: ${port[1]?.split("?")[1]?.split("=")[1]}
   skip-cert-verify: true`);
     }
     if (protocol[0] === "trojan-go") {
